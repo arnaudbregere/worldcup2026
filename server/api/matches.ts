@@ -7,7 +7,7 @@ export default defineCachedEventHandler(
       { responseType: 'text' }
     )
     const json = JSON.parse(data)
-    return json.matches?.filter((match: Match) => match.score?.ft).slice(0, 10) ?? []
+    return json.matches?.filter((match: Match) => match.score?.ft)
   },
   { maxAge: 60 * 60 }
 )
