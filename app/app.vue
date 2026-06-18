@@ -10,10 +10,30 @@
     <main class="home_container">
       <section class="home_matches" aria-label="Matchs récents">
         <h2 class="home_matches-title">Matchs</h2>
+        <p v-if="pending">Chargement...</p>
+        <p v-else-if="error">Erreur de chargement.</p>
+        <ul v-else>
+          <li
+            v-for="match in matches"
+            :key="`${match.date}-${match.team1}-${match.team2}`"
+            class="match-card"
+          >
+            <span class="match-card__teams">
+              {{ match.team1 }} vs {{ match.team2 }}
+            </span>
+    
+            <span class="match-card__info">
+              {{ match.group }} · {{ match.ground }}
+            </span>
+          </li>
+        </ul>
       </section>
     </main>
   </div>
 </template>
+<script setup lang="ts">
+const { data: matches, pending, error } = await useFetch('/api/matches')
+</script>
 <style lang="scss" scoped>
 .home {
   &_container {
