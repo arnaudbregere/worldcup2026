@@ -63,5 +63,25 @@ const { data: matches, pending, error } = await useFetch('/api/matches')
   }
 
 }
+.match-card {
+  background: $color-card;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &__teams {
+    font-weight: 600;
+    color: $color-primary;
+  }
+
+  &__info {
+    font-size: $font-size-sm;
+    color: $color-muted;
+  }
+}
 
 </style>
