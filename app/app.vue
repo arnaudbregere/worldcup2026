@@ -72,11 +72,33 @@ const getScore = (match: Match): string => {
   return `${match.score.ft[0]} - ${match.score.ft[1]}`
 }
 
-
+useHead({
+  title: 'FIFA World Cup 2026 · Scores & Matchs',
+  meta: [
+    {
+      name: 'description',
+      content: 'Suivez les scores et matchs de la Coupe du Monde 2026 au Canada, USA et Mexique.'
+    }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SportsEvent',
+        name: 'FIFA World Cup 2026',
+        location: 'Canada, USA, Mexico',
+        startDate: '2026-06-11',
+        endDate: '2026-07-19'
+      })
+    }
+  ]
+})
 
 </script>
 
 <style lang="scss" scoped>
+// TODO : exporter dans _home.scss et _match-card.scss
 .home {
   &_container {
     max-width: $main-container;
@@ -146,7 +168,7 @@ const getScore = (match: Match): string => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid $color-accent;
 
   &__teams {
     font-weight: 600;
@@ -161,6 +183,24 @@ const getScore = (match: Match): string => {
   &__info {
     font-size: $font-size-sm;
     color: $color-muted;
+  }
+}
+
+@media (min-width: #{$breakpoint-md}) {
+  .home {
+    &_container {
+      padding: $spacing-xl;
+    }
+
+    &_header {
+      &-title {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .match-card {
+    padding: $spacing-md;
   }
 }
 </style>
