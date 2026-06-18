@@ -1,5 +1,5 @@
 import type { Match } from '~/types/matches'
-
+const maxAge = 3600 
 export default defineCachedEventHandler(
   async (event): Promise<Match[]> => {
     try {
@@ -20,5 +20,5 @@ export default defineCachedEventHandler(
       throw createError({ statusCode: 503, message: 'Service temporairement indisponible' })
     }
   },
-  { maxAge: 60 * 60 }
+  { maxAge: maxAge }
 )

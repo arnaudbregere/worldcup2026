@@ -39,12 +39,17 @@
             v-for="match in filteredMatches"
             :key="`${match.date}-${match.team1}-${match.team2}`"
             class="match-card"
+            :aria-label="`${match.team1} contre ${match.team2}, score : ${getScore(match)}, ${match.group}, ${match.ground}`"
           >
-            <span class="match-card__teams">
-              {{ match.team1 }} vs {{ match.team2 }}
-            </span>
-            <span class="match-card__score">{{ getScore(match) }}</span>
-            <span class="match-card__info">
+            <div class="match-card__top">
+              <span class="match-card__teams" aria-hidden="true">
+                {{ match.team1 }} vs {{ match.team2 }}
+              </span>
+              <span class="match-card__score" aria-hidden="true">
+                {{ getScore(match) }}
+              </span>
+            </div>
+            <span class="match-card__info" aria-hidden="true">
               {{ match.group }} · {{ match.ground }}
             </span>
           </li>
@@ -167,19 +172,28 @@ useHead({
   border-radius: $radius-md;
   padding: $spacing-sm;
   margin-bottom: $spacing-xs;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-left: 4px solid $color-accent;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-xs;
+  }
 
   &__teams {
     font-weight: 600;
     color: $color-primary;
+    flex: 1;
   }
 
   &__score {
     font-weight: 700;
     color: $color-accent;
+    white-space: nowrap;
   }
 
   &__info {
