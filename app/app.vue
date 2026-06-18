@@ -27,7 +27,9 @@
         </h2>
 
         <p v-if="pending" role="status" aria-live="polite">Chargement...</p>
-        <p v-else-if="error" role="alert">Erreur de chargement des matchs.</p>
+        <p v-else-if="error" role="alert" aria-live="assertive">
+          ⚠️ Impossible de charger les matchs. Veuillez réessayer plus tard.
+        </p>
         <p v-else-if="filteredMatches.length === 0" role="status">
           Aucun match trouvé pour "{{ query }}".
         </p>
