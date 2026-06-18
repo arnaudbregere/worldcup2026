@@ -1,17 +1,5 @@
-interface Match {
-  round: string
-  date: string
-  time?: string
-  team1: string
-  team2: string
-  group: string
-  ground: string
-  score?: {
-    ft: [number, number]
-    ht?: [number, number]
-  }
-}
 
+import type { Match } from '~/types/matches'
 export default defineCachedEventHandler(
   async (): Promise<Match[]> => {
     const data = await $fetch<string>(

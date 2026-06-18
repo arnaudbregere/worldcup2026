@@ -21,7 +21,9 @@
             <span class="match-card__teams">
               {{ match.team1 }} vs {{ match.team2 }}
             </span>
-    
+             <span class="match-card__score">
+              {{ getScore(match) }}
+            </span>
             <span class="match-card__info">
               {{ match.group }} · {{ match.ground }}
             </span>
@@ -32,7 +34,14 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { Match } from '~/types/matches'
 const { data: matches, pending, error } = await useFetch('/api/matches')
+
+const getScore = (match: Match): string => {
+  if (!match.score) return 'À venir'
+
+  return `${match.score.ft[0]} - ${match.score.ft[1]}`
+}
 </script>
 <style lang="scss" scoped>
 .home {
